@@ -5,5 +5,6 @@ SET precio = :precio,
     estado = :estado,
     descuento = :descuento,
     nombre_imagen = :nombreImagen,
-    nombre_moto = :nombreMoto
+    nombre_moto = :nombreMoto,
+    cantidad = :cantidad
 WHERE id =:id;

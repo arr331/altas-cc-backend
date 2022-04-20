@@ -1,1 +1,1 @@
-INSERT INTO moto (id, precio, cc, marca, estado, descuento, nombre_imagen, nombre_moto) VALUES (:id, :precio, :cc, :marca, :estado, :descuento, :nombreImagen, :nombreMoto);
+INSERT INTO moto (id, precio, cc, marca, estado, descuento, nombre_imagen, nombre_moto, cantidad) VALUES (:id, :precio, :cc, :marca, :estado, :descuento, :nombreImagen, :nombreMoto, :cantidad);

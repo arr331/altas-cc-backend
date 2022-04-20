@@ -14,4 +14,5 @@ public class DtoMoto {
     private int descuento;
     private String nombreImagen;
     private String nombreMoto;
+    private int cantidad;
 }

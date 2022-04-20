@@ -15,7 +15,8 @@ public class FabricaMoto {
                 comandoMoto.getEstado(),
                 comandoMoto.getDescuento(),
                 comandoMoto.getNombreImagen(),
-                comandoMoto.getNombreMoto()
+                comandoMoto.getNombreMoto(),
+                comandoMoto.getCantidad()
         );
     }
 }

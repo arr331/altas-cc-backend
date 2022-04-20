@@ -1,0 +1,1 @@
+INSERT INTO compra (id, id_moto, cedula, nombre_completo, fecha, valor_total, abono, codigo, estado) VALUES (:id, :idMoto, :cedula, :nombreCompleto, :fecha, :valorTotal, :abono, :codigo, :estado);

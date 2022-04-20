@@ -20,8 +20,9 @@ public class MapeoMoto implements RowMapper<DtoMoto>, MapperResult {
         int descuento = resultSet.getInt("descuento");
         String nombreImagen = resultSet.getString("nombre_imagen");
         String nombreMoto = resultSet.getString("nombre_moto");
+        int cantidad = resultSet.getInt("cantidad");
 
-        return new DtoMoto(id, precio, cc, marca, estado, descuento, nombreImagen, nombreMoto);
+        return new DtoMoto(id, precio, cc, marca, estado, descuento, nombreImagen, nombreMoto, cantidad);
     }
 
 }

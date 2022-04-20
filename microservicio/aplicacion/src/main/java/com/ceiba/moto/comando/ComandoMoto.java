@@ -18,4 +18,5 @@ public class ComandoMoto {
     private int descuento;
     private String nombreImagen;
     private String nombreMoto;
+    private int cantidad;
 }
