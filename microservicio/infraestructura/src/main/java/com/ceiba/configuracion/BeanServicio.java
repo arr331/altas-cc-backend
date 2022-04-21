@@ -2,6 +2,8 @@ package com.ceiba.configuracion;
 
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.compra.servicio.ServicioCrearCompra;
+import com.ceiba.compra.servicio.ServicioDetallePago;
+import com.ceiba.moto.puerto.dao.DaoMoto;
 import com.ceiba.moto.puerto.repositorio.RepositorioMoto;
 import com.ceiba.moto.servicio.ServicioCrearMoto;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
@@ -35,7 +37,12 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioCrearCompra servicioCrearCompra(RepositorioCompra repositorioCompra) {
-        return new ServicioCrearCompra(repositorioCompra);
+    public ServicioCrearCompra servicioCrearCompra(RepositorioCompra repositorioCompra, ServicioDetallePago servicioDetallePago) {
+        return new ServicioCrearCompra(repositorioCompra, servicioDetallePago);
+    }
+
+    @Bean
+    public ServicioDetallePago servicioDetallePago(RepositorioMoto repositorioMoto, DaoMoto daoMoto) {
+        return new ServicioDetallePago(repositorioMoto,daoMoto);
     }
 }

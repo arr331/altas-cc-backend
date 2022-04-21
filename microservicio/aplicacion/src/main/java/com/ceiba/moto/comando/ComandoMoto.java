@@ -15,7 +15,7 @@ public class ComandoMoto {
     private int cc;
     private String marca;
     private String estado;
-    private int descuento;
+    private double descuento;
     private String nombreImagen;
     private String nombreMoto;
     private int cantidad;

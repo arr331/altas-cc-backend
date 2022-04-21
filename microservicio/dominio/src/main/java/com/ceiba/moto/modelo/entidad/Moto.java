@@ -29,12 +29,12 @@ public class Moto {
     private int cc;
     private String marca;
     private String estado;
-    private int descuento;
+    private double descuento;
     private String nombreImagen;
     private String nombreMoto;
     private int cantidad;
 
-    public static Moto of(Long id, double precio, int cc, String marca, String estado, int descuento, String nombreImagen, String nombreMoto, int cantidad) {
+    public static Moto of(Long id, double precio, int cc, String marca, String estado, double descuento, String nombreImagen, String nombreMoto, int cantidad) {
         validarObligatorio(precio, SE_DEBE_INGRESAR_EL_PRECIO_DE_LA_MOTO);
         validarObligatorio(cc, SE_DEBE_INGRESAR_EL_CC_DE_LA_MOTO);
         validarObligatorio(marca, SE_DEBE_INGRESAR_LA_MARCA_DE_LA_MOTO);
@@ -47,13 +47,13 @@ public class Moto {
         validarMenor(VALOR_MINIMO_USD, (long) precio, VALOR_DEL_PRECIO_MENOR_QUE_1000_USD);
         validarMenor(CILINDRAJE_MINIMO, (long) cc, CILINDRAJE_MINIMO_MENSAJE);
 
-        validarPositivo((double) descuento, VALOR_DESCUENTO_POSITIVO);
+        validarPositivo(descuento, VALOR_DESCUENTO_POSITIVO);
         validarPositivo((double) cantidad, VALOR_CANTIDAD_POSITIVO);
 
         return new Moto(id, precio, cc, marca, estado, descuento, nombreImagen, nombreMoto, cantidad);
     }
 
-    private Moto(Long id, double precio, int cc, String marca, String estado, int descuento, String nombreImagen, String nombreMoto, int cantidad) {
+    private Moto(Long id, double precio, int cc, String marca, String estado, double descuento, String nombreImagen, String nombreMoto, int cantidad) {
         this.id = id;
         this.precio = precio;
         this.cc = cc;

@@ -33,13 +33,7 @@ public class ConsultaControladorCompra {
     @GetMapping("{id}")
     @ApiOperation("Traer compra por código")
     public DtoCompra traer(@PathVariable Long id) {
-        System.out.println(id + " skjdskdkkskd");
         return this.manejadorTraerCompra.ejecutar(id);
     }
 
-//    @GetMapping DONDE VA??
-//    @ApiOperation("Información de pago para la compra")
-//    public List<DtoInformacionCompra> informacionCompra() {
-//        return this.manejadorListarCompras.ejecutar();
-//    }
 }

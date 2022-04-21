@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface DaoMoto {
     List<DtoMoto> listar();
+    DtoMoto traerPorId(Long id);
 }

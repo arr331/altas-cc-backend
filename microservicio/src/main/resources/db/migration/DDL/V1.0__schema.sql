@@ -28,7 +28,7 @@ create table compra (
  fecha datetime null,
  valor_total double not null,
  abono double not null,
- codigo varchar(10) not null,
+ codigo varchar(14) not null,
  estado varchar(1) not null,
 
  primary key (id)
@@ -39,8 +39,8 @@ INSERT INTO moto (id, precio, cc, marca, estado, descuento, nombre_imagen, nombr
 INSERT INTO moto (id, precio, cc, marca, estado, descuento, nombre_imagen, nombre_moto, cantidad) VALUES (3, 21000, 999, 'HONDA', 'I', 0, 'cbr.png', 'CBR 1000RR', 1);
 INSERT INTO moto (id, precio, cc, marca, estado, descuento, nombre_imagen, nombre_moto, cantidad) VALUES (4, 25000, 1099, 'DUCATI', 'A', 12, 'ducati.png', '1098 Sport', 2);
 INSERT INTO moto (id, precio, cc, marca, estado, descuento, nombre_imagen, nombre_moto, cantidad) VALUES (5, 24300, 1199, 'APRILIA', 'A', 15, 'aprilia.png', 'Rsv4', 0);
-INSERT INTO moto (id, precio, cc, marca, estado, descuento, nombre_imagen, nombre_moto, cantidad) VALUES (6, 17000, 599, 'YAMAHA', 'A', 9, 'r6.png', 'YZF-R6', 2);
+INSERT INTO moto (id, precio, cc, marca, estado, descuento, nombre_imagen, nombre_moto, cantidad) VALUES (6, 14000, 599, 'YAMAHA', 'A', 9, 'r6.png', 'YZF-R6', 2);
 
-INSERT INTO compra (id, id_moto, cedula, nombre_completo, fecha, valor_total, abono, codigo, estado) VALUES (1, 1, '1040048300', 'Adrian Ramírez', null, 22050, 22050, '2022-1', 'C');
-INSERT INTO compra (id, id_moto, cedula, nombre_completo, fecha, valor_total, abono, codigo, estado) VALUES (2, 6, '1040046200', 'Andres Hernández', null, 15470, 15470, '2022-2', 'C');
-INSERT INTO compra (id, id_moto, cedula, nombre_completo, fecha, valor_total, abono, codigo, estado) VALUES (3, 3, '39189986', 'Beatriz Osorio', null, 21000, 10500, '2022-3', 'I');
+INSERT INTO compra (id, id_moto, cedula, nombre_completo, fecha, valor_total, abono, codigo, estado) VALUES (1, 1, '1040048300', 'Adrian Ramírez', '2022-04-21 17:29:02', 22050, 22050, '2022-1', 'C');
+INSERT INTO compra (id, id_moto, cedula, nombre_completo, fecha, valor_total, abono, codigo, estado) VALUES (2, 6, '1040046200', 'Andres Hernández', '2022-03-21 18:49:01', 15470, 15470, '2022-2', 'C');
+INSERT INTO compra (id, id_moto, cedula, nombre_completo, fecha, valor_total, abono, codigo, estado) VALUES (3, 3, '39189986', 'Beatriz Osorio', '2022-04-21 13:11:05', 21000, 10500, '2022-3', 'I');

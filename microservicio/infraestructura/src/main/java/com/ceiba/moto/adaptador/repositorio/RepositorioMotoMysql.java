@@ -4,6 +4,7 @@ import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.moto.modelo.entidad.Moto;
 import com.ceiba.moto.puerto.repositorio.RepositorioMoto;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -35,6 +36,8 @@ public class RepositorioMotoMysql implements RepositorioMoto {
 
     @Override
     public boolean existePorId(Long id) {
-        return false;
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePorId, paramSource, Boolean.class);
     }
 }
