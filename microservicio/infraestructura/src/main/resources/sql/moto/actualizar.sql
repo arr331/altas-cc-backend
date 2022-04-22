@@ -1,10 +1,10 @@
 UPDATE moto
 SET precio = :precio,
     cc = :cc,
-    marca = : marca,
+    marca = :marca,
     estado = :estado,
     descuento = :descuento,
     nombre_imagen = :nombreImagen,
     nombre_moto = :nombreMoto,
     cantidad = :cantidad
-WHERE id =:id;
+WHERE id = :id;

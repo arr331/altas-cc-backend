@@ -5,6 +5,7 @@ import com.ceiba.compra.servicio.ServicioCrearCompra;
 import com.ceiba.compra.servicio.ServicioDetallePago;
 import com.ceiba.moto.puerto.dao.DaoMoto;
 import com.ceiba.moto.puerto.repositorio.RepositorioMoto;
+import com.ceiba.moto.servicio.ServicioActualizarMoto;
 import com.ceiba.moto.servicio.ServicioCrearMoto;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import com.ceiba.usuario.servicio.ServicioActualizarUsuario;
@@ -34,6 +35,11 @@ public class BeanServicio {
     @Bean
     public ServicioCrearMoto servicioCrearMoto(RepositorioMoto repositorioMoto) {
         return new ServicioCrearMoto(repositorioMoto);
+    }
+
+    @Bean
+    public ServicioActualizarMoto servicioActualizarMoto(RepositorioMoto repositorioMoto) {
+        return new ServicioActualizarMoto(repositorioMoto);
     }
 
     @Bean
