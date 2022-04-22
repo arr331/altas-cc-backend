@@ -71,7 +71,7 @@ pipeline {
       steps {
 		echo "------------>Build<------------"
 		//Construir sin tarea test que se ejecutó previamente
-		sh './gradlew build -x test'
+		sh './microservicio/gradlew build -x test'
       }
     }
   }
