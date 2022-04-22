@@ -51,8 +51,8 @@ pipeline {
       steps{
 		dir("microservicio") {
 	  		echo "------------>Compile & Unit Tests<------------"
-    	  		sh 'chmod +x gradlew'
-			sh './gradlew --b ./build.gradle test'
+    	  		 	sh 'gradle clean'
+	  			sh 'gradle test'
 		}
        }
     }
@@ -71,10 +71,10 @@ pipeline {
 
     stage('Build') {
       steps {
-		dir("altas-cc") {
+		dir("microservicio") {
         		echo "------------>Build<------------"
 			//Construir sin tarea test que se ejecutó previamente
-			sh './gradlew --b ./build.gradle build -x test'
+			sh 'gradle build -x test'
         	}
       }
     }
@@ -86,8 +86,8 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit 'altas-cc/infraestructura/build/test-results/test/*.xml'
-      junit 'altas-cc/dominio/build/test-results/test/*.xml'
+      junit 'microservicio/infraestructura/build/test-results/test/*.xml'
+      junit 'microservicio/dominio/build/test-results/test/*.xml'
     }
     failure {
       echo 'This will run only if failed'
