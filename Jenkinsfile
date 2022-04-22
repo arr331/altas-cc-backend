@@ -47,6 +47,14 @@ pipeline {
       }
     }
 
+    stage('Build') {
+      steps {
+		echo "------------>Build<------------"
+		//Construir sin tarea test que se ejecutó previamente
+		sh './microservicio/gradlew build -x test'
+      }
+    }
+
     stage('Compile & Unit Tests') {
       steps{
 		echo "------------>compile & Unit Tests<------------"
@@ -61,19 +69,14 @@ pipeline {
         	withSonarQubeEnv('Sonar') {
 			sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
 	  	}
+		echo '------------>Empiezo<------------'
 		sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[altas-cc-adrian.ramirez]', 
         	sonarName:'CeibaADN-AltasCc(adrian.ramirez)', 
         	sonarPathProperties:'./sonar-project.properties') 
+		echo '------------>Termino<------------'
       }
     }
 
-    stage('Build') {
-      steps {
-		echo "------------>Build<------------"
-		//Construir sin tarea test que se ejecutó previamente
-		sh './microservicio/gradlew build -x test'
-      }
-    }
   }
 
   post {
