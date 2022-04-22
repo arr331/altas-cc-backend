@@ -8,11 +8,11 @@ import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
 import java.time.LocalDateTime;
 
 public class ServicioCrearCompra {
-    private final String MENSAJE_ABONO_SUPERIOR_AL_VALOR_FINAL = "El valor a pagar no puede superar el valor de pago final";
-    private final String MENSAJE_ABONO_INSUFICIENTE_PARA_PRECOMPRA = "El valor a pagar debe ser mínimo la mitad  del valor de pago final, Valor mínimo: $%s";
-    private final String COMPRA_COMPLETA = "C";
-    private final String COMPRA_INCOMPLETA = "I";
-    private final double MITAD = 2;
+    private static final String MENSAJE_ABONO_SUPERIOR_AL_VALOR_FINAL = "El valor a pagar no puede superar el valor de pago final";
+    private static final String MENSAJE_ABONO_INSUFICIENTE_PARA_PRECOMPRA = "El valor a pagar debe ser mínimo la mitad  del valor de pago final, Valor mínimo: $%s";
+    private static final String COMPRA_COMPLETA = "C";
+    private static final String COMPRA_INCOMPLETA = "I";
+    private static final double MITAD = 2;
 
     private final RepositorioCompra repositorioCompra;
     private final ServicioDetallePago servicioDetallePago;

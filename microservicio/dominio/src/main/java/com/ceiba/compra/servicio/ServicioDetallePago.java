@@ -10,15 +10,15 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class ServicioDetallePago {
-    private final double PORCENTAJE_IMPUESTO = 2;
-    private final double PORCENTAJE_DESCUENTO_LUNES = 1.5;
-    private final double PORCENTAJE_DESCUENTO_FIN_DE_SEMANA = 1;
-    private final double UNO = 1;
-    private final double CIEN = 100;
-    private final int CC_PARA_DESCUENTO = 600;
-    private final double PRECIO_USD_PARA_IMPUESTO = 15000;
-    private final String MENSAJE_MOTO_NO_EXITE = "La moto no existe en el sistema";
-    private final String MENSAJE_SIN_UNIDADES_DISPONIBLES = "Esta moto no está disponible para su compra";
+    private static final double PORCENTAJE_IMPUESTO = 2;
+    private static final double PORCENTAJE_DESCUENTO_LUNES = 1.5;
+    private static final double PORCENTAJE_DESCUENTO_FIN_DE_SEMANA = 1;
+    private static final double UNO = 1;
+    private static final double CIEN = 100;
+    private static final int CC_PARA_DESCUENTO = 600;
+    private static final double PRECIO_USD_PARA_IMPUESTO = 15000;
+    private static final String MENSAJE_MOTO_NO_EXITE = "La moto no existe en el sistema";
+    private static final String MENSAJE_SIN_UNIDADES_DISPONIBLES = "Esta moto no está disponible para su compra";
 
     private final RepositorioMoto repositorioMoto;
     private final DaoMoto daoMoto; // No se si va acá porque no hay servicio para consulta
