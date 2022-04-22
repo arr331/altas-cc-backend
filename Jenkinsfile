@@ -12,7 +12,7 @@ pipeline {
 
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
-    jdk 'JDK11_Centos' //Verisión preinstalada en la Configuración del Master
+    jdk 'JDK13_Centos' //Verisión preinstalada en la Configuración del Master
     gradle 'Gradle5.0_Centos'
   }
 /*	Versiones disponibles
@@ -51,8 +51,8 @@ pipeline {
       steps{
 		dir("microservicio") {
 	  		echo "------------>Compile & Unit Tests<------------"
-    	  		 	sh 'gradle clean'
-	  			sh 'gradle test'
+    	  		 	sh 'gradlew clean'
+	  			sh 'gradlew test'
 		}
        }
     }
