@@ -1,3 +1,5 @@
+@Library('ceiba-jenkins-library') _
+
 pipeline {
   //Donde se va a ejecutar el Pipeline
   agent {
@@ -47,6 +49,20 @@ pipeline {
       }
     }
 
+    stage('Static Code Analysis') {
+      steps{
+      	echo '------------>Análisis de código estático<------------'
+        	withSonarQubeEnv('Sonar') {
+			sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+	  	}
+		echo '------------>Empiezo<------------'
+		sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[altas-cc-adrian.ramirez]', 
+        	sonarName:'CeibaADN-AltasCc(adrian.ramirez)', 
+        	sonarPathProperties:'./sonar-project.properties') 
+		echo '------------>Termino<------------'
+      }
+    }
+
     stage('Build') {
       steps {
 		echo "------------>Build<------------"
@@ -62,20 +78,6 @@ pipeline {
 		sh 'chmod +x ./microservicio/gradlew'
 		sh './microservicio/gradlew --b ./microservicio/build.gradle test'
        }
-    }
-
-    stage('Static Code Analysis') {
-      steps{
-      	echo '------------>Análisis de código estático<------------'
-        	withSonarQubeEnv('Sonar') {
-			sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
-	  	}
-		echo '------------>Empiezo<------------'
-		sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[altas-cc-adrian.ramirez]', 
-        	sonarName:'CeibaADN-AltasCc(adrian.ramirez)', 
-        	sonarPathProperties:'./sonar-project.properties') 
-		echo '------------>Termino<------------'
-      }
     }
 
   }
