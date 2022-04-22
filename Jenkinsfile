@@ -56,7 +56,7 @@ pipeline {
 			sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
 	  	}
 		echo '------------>Empiezo<------------'
-		sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[altas-cc-adrian.ramirez]', 
+		sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[CeibaADN-AltasCc-adrian.ramirez]', 
         	sonarName:'CeibaADN-AltasCc(adrian.ramirez)', 
         	sonarPathProperties:'./sonar-project.properties') 
 		echo '------------>Termino<------------'
