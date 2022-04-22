@@ -76,10 +76,11 @@ pipeline {
 
     stage('Build') {
       steps {
-        	echo "------------>Build<------------"
-		//Construir sin tarea test que se ejecutó previamente
-		sh './gradlew --b ./build.gradle build -x test'
-        }
+		dir("altas-cc") {
+        		echo "------------>Build<------------"
+			//Construir sin tarea test que se ejecutó previamente
+			sh './gradlew --b ./build.gradle build -x test'
+        	}
       }
     }
   }
