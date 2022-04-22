@@ -63,7 +63,7 @@ pipeline {
 	  	}
 		sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[altas-cc-adrian.ramirez]', 
         	sonarName:'CeibaADN-AltasCc(adrian.ramirez)', 
-        	sonarPathProperties:'./sonar-project.properties')
+        	sonarPathProperties:'./sonar-project.properties') 
       }
     }
 
