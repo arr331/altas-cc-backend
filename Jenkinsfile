@@ -1,3 +1,4 @@
+@Library('ceiba-jenkins-library') _
 pipeline {
   //Donde se va a ejecutar el Pipeline
   agent {
@@ -51,8 +52,8 @@ pipeline {
       steps{
 	dir("altas-cc") {
 	  echo "------------>Compile & Unit Tests<------------"
-    	  sh 'gradle clean'
-	  sh 'gradle test'
+    	  sh 'chmod +x gradlew'
+	  sh './gradlew --b ./build.gradle test'
 	}
        
       }
@@ -62,15 +63,23 @@ pipeline {
       steps{
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
-sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
-        }
+		sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+	 }
+
+	sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:[altas-cc-adrian.ramirez]', 
+        sonarName:'CeibaADN-AltasCc(adrian.ramirez)', 
+        sonarPathProperties:'./sonar-project.properties')
+    	}
+
+
       }
     }
 
     stage('Build') {
       steps {
-        dir("altas-cc") {
-           sh 'gradle build -x test'
+        	echo "------------>Build<------------"
+		//Construir sin tarea test que se ejecutó previamente
+		sh './gradlew --b ./build.gradle build -x test'
         }
       }
     }
