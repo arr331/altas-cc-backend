@@ -50,8 +50,8 @@ pipeline {
     stage('Compile & Unit Tests') {
       steps{
 		echo "------------>compile & Unit Tests<------------"
-		sh './microservicio/gradlew clean'
 		sh 'chmod +x gradlew'
+		sh './microservicio/gradlew clean'
 		sh './microservicio/build.gradle test'
        }
     }
