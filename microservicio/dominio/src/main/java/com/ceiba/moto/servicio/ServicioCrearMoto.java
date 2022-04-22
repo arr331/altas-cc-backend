@@ -1,5 +1,6 @@
 package com.ceiba.moto.servicio;
 
+import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.moto.modelo.entidad.Moto;
 import com.ceiba.moto.puerto.repositorio.RepositorioMoto;
 
@@ -17,6 +18,9 @@ public class ServicioCrearMoto {
     }
 
     private void verificarExistencia(Long id) {
-
+        boolean existe = this.repositorioMoto.existePorId(id);
+        if(existe) {
+            throw new ExcepcionDuplicidad(LA_MOTO_YA_EXISTE_EN_EL_SISTEMA);
+        }
     }
 }

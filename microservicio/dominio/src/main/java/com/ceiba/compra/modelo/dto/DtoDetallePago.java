@@ -1,10 +1,12 @@
 package com.ceiba.compra.modelo.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class DtoDetallePago {
     private double valorSinDescuento;
     private double valorFinal;

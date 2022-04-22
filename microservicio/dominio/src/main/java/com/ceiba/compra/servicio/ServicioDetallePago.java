@@ -21,7 +21,7 @@ public class ServicioDetallePago {
     private final String MENSAJE_SIN_UNIDADES_DISPONIBLES = "Esta moto no está disponible para su compra";
 
     private final RepositorioMoto repositorioMoto;
-    private final DaoMoto daoMoto;
+    private final DaoMoto daoMoto; // No se si va acá porque no hay servicio para consulta
 
     public ServicioDetallePago(RepositorioMoto repositorioMoto, DaoMoto daoMoto) {
         this.repositorioMoto = repositorioMoto;
@@ -50,7 +50,7 @@ public class ServicioDetallePago {
             dtoDetallePago.setDescuentoFinDeSemana(PORCENTAJE_DESCUENTO_FIN_DE_SEMANA);
         }
         if (dtoMoto.getPrecio() > PRECIO_USD_PARA_IMPUESTO) {
-            valorFinal = valorFinal * (1 + (PORCENTAJE_IMPUESTO / CIEN)); // Como es por ser fórmula -> 1 ?
+            valorFinal = valorFinal * (UNO + (PORCENTAJE_IMPUESTO / CIEN)); // Como es por ser fórmula -> 1 ?
             dtoDetallePago.setImpuesto(PORCENTAJE_IMPUESTO);
         }
 
