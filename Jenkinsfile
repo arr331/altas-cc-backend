@@ -49,11 +49,11 @@ pipeline {
 
     stage('Compile & Unit Tests') {
       steps{
-		dir("altas-cc") {
+		
 	  		echo "------------>Compile & Unit Tests<------------"
-    	  		sh 'gradle clean'
-	  		sh 'gradle test'
-		}
+    	  		sh 'chmod +x gradlew'
+			sh './gradlew --b ./build.gradle test'
+		
        }
     }
 
