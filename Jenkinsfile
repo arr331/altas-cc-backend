@@ -49,11 +49,11 @@ pipeline {
 
     stage('Compile & Unit Tests') {
       steps{
-		
+		dir("microservicio") {
 	  		echo "------------>Compile & Unit Tests<------------"
     	  		sh 'chmod +x gradlew'
 			sh './gradlew --b ./build.gradle test'
-		
+		}
        }
     }
 
