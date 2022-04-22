@@ -51,8 +51,8 @@ pipeline {
       steps{
 		dir("microservicio") {
 	  		echo "------------>Compile & Unit Tests<------------"
-    	  		 	sh 'gradlew clean'
-	  			sh 'gradlew test'
+    	  		 	sh 'gradle clean'
+	  			sh 'gradle test'
 		}
        }
     }
