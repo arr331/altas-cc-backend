@@ -2,18 +2,17 @@ package com.ceiba.compra.modelo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class DtoDetallePago {
     private double valorSinDescuento;
     private double valorFinal;
     private double impuesto; // 2%
     private double descuentoLunes; // 1.5%
     private double descuentoFinDeSemana; // 1%
-
-    public DtoDetallePago() {
-    }
 }
