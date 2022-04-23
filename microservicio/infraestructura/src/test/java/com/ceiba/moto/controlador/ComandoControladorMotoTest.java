@@ -41,4 +41,18 @@ public class ComandoControladorMotoTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'valor': 7}")); // De donde valor
     }
+
+    @Test
+    @DisplayName("Debería crea una moto")
+    void deberiaActualizar() throws Exception{
+        // arrange
+        Long id = 1L;
+        ComandoMoto comandoMoto = new ComandoMotoTestDataBuilder().conId(id).conNombreMoto("Ktm Super Duke 1290 Editada").build();
+
+        // act - assert
+        mocMvc.perform(put("/motos")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(comandoMoto)))
+                .andExpect(status().isOk());
+    }
 }

@@ -25,6 +25,16 @@ public class ComandoMotoTestDataBuilder {
         this.cantidad = 3;
     }
 
+    public ComandoMotoTestDataBuilder conId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public ComandoMotoTestDataBuilder conNombreMoto(String nombreMoto) {
+        this.nombreMoto = nombreMoto;
+        return this;
+    }
+
     public ComandoMoto build() {
         return new ComandoMoto(id, precio, cc, marca, estado, descuento, nombreImagen, nombreMoto, cantidad);
     }

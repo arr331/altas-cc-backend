@@ -32,7 +32,7 @@ public class ComandoControladorCompraTest {
     private MockMvc mocMvc;
 
     @Test
-    @DisplayName("Debería crea una compra")
+    @DisplayName("Debería crear una compra")
     void deberiaCrearCompra() throws Exception {
         // Arrange
         ComandoCompra comandoCompra = new ComandoCompraTestDataBuilder().build();
