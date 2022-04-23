@@ -5,7 +5,7 @@ import lombok.Getter;
 import static com.ceiba.dominio.ValidadorArgumento.*;
 
 @Getter
-public class Moto {
+public final class Moto {
     private static final String SE_DEBE_INGRESAR_EL_PRECIO_DE_LA_MOTO = "El campo precio es obligatorio";
     private static final String SE_DEBE_INGRESAR_EL_CC_DE_LA_MOTO = "El campo cc es obligatorio";
     private static final String SE_DEBE_INGRESAR_LA_MARCA_DE_LA_MOTO = "El campo marca es obligatorio";

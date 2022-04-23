@@ -10,7 +10,7 @@ import static com.ceiba.dominio.ValidadorArgumento.validarPositivo;
 
 @Setter
 @Getter
-public class Compra {
+public final class Compra {
     private static final String MENSAJE_ID_MOTO_OBLIGATORIO = "La compra debe tener una moto";
     private static final String SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA = "El campo cédula es obligatorio";
     private static final String SE_DEBE_INGRESAR_EL_NOMBRE_PERSONA = "El campo nombre completo es obligatorio";
