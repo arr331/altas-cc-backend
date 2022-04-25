@@ -1,14 +1,12 @@
 package com.ceiba.compra.comando;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class ComandoCompra {
     private Long id;
     private Long idMoto;
@@ -19,6 +17,10 @@ public class ComandoCompra {
     private double abono;
     private String codigo;
     private String estado;
+
+    public ComandoCompra() {
+        // This is intentional
+    }
 
     public ComandoCompra(Long id, Long idMoto, String cedula, String nombreCompleto, LocalDateTime fecha, double valorTotal, double abono, String codigo, String estado) {
         this.id = id;
