@@ -1,10 +1,7 @@
 package com.ceiba.moto.modelo.entidad;
 
-import lombok.Getter;
-
 import static com.ceiba.dominio.ValidadorArgumento.*;
 
-@Getter
 public final class Moto {
     private static final String SE_DEBE_INGRESAR_EL_PRECIO_DE_LA_MOTO = "El campo precio es obligatorio";
     private static final String SE_DEBE_INGRESAR_EL_CC_DE_LA_MOTO = "El campo cc es obligatorio";
@@ -63,5 +60,41 @@ public final class Moto {
         this.nombreImagen = nombreImagen;
         this.nombreMoto = nombreMoto;
         this.cantidad = cantidad;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public int getCc() {
+        return cc;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public String getNombreImagen() {
+        return nombreImagen;
+    }
+
+    public String getNombreMoto() {
+        return nombreMoto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
     }
 }
