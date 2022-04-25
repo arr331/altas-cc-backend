@@ -1,11 +1,9 @@
 package com.ceiba.compra.modelo.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Getter
 @AllArgsConstructor
 public class DtoCompra {
     private Long id;
@@ -17,4 +15,40 @@ public class DtoCompra {
     private double abono;
     private String codigo;
     private String estado;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getIdMoto() {
+        return idMoto;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public double getAbono() {
+        return abono;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
 }
