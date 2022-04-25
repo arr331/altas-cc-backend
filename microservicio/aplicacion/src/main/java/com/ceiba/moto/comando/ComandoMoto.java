@@ -1,5 +1,8 @@
 package com.ceiba.moto.comando;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class ComandoMoto {
     private Long id;
     private double precio;
@@ -13,18 +16,6 @@ public class ComandoMoto {
 
     public ComandoMoto() {
         // Es intencional
-    }
-
-    public ComandoMoto(Long id, double precio, int cc, String marca, String estado, double descuento, String nombreImagen, String nombreMoto, int cantidad) {
-        this.id = id;
-        this.precio = precio;
-        this.cc = cc;
-        this.marca = marca;
-        this.estado = estado;
-        this.descuento = descuento;
-        this.nombreImagen = nombreImagen;
-        this.nombreMoto = nombreMoto;
-        this.cantidad = cantidad;
     }
 
     public Long getId() {
