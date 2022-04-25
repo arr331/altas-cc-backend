@@ -10,10 +10,19 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ServicioDetallePagoTest {
     private static final Long ID_MOTO = 1L;
+    private static final double PORCENTAJE_IMPUESTO = 2;
+    private static final double PORCENTAJE_DESCUENTO_LUNES = 1.5;
+    private static final double PORCENTAJE_DESCUENTO_FIN_DE_SEMANA = 1;
+    private static final int CC_500 = 500;
+    private static final int CC_700 = 700;
+    private static final int CANTIDAD_CERO = 0;
 
     @Test
     @DisplayName("Validar que la moto si exista")
@@ -33,12 +42,11 @@ public class ServicioDetallePagoTest {
     @DisplayName("Validar unidades disponibles")
     void validarUnidadesDisponibles() {
         // Arrange
-        int cantidad = 0;
         RepositorioMoto repositorioMoto = Mockito.mock(RepositorioMoto.class);
         DaoMoto daoMoto = Mockito.mock(DaoMoto.class);
         ServicioDetallePago servicioDetallePago = new ServicioDetallePago(repositorioMoto, daoMoto);
         Mockito.when(repositorioMoto.existePorId(Mockito.anyLong())).thenReturn(true);
-        Mockito.when(daoMoto.traerPorId(Mockito.anyLong())).thenReturn(new MotoTestDataBuilder().buildDto(cantidad)); // Como seria?
+        Mockito.when(daoMoto.traerPorId(Mockito.anyLong())).thenReturn(new MotoTestDataBuilder().conCantidad(CANTIDAD_CERO).buildDto());
 
         // Act - Assert
         BasePrueba.assertThrows(() -> servicioDetallePago.ejecutar(ID_MOTO), ExcepcionSinDatos.class,
@@ -49,15 +57,68 @@ public class ServicioDetallePagoTest {
     @DisplayName("Verificar que se incluya el impuesto")
     void verificarQueSeIncluyaElImpuesto() {
         // Arrange
-        int cantidad = 1;
         RepositorioMoto repositorioMoto = Mockito.mock(RepositorioMoto.class);
         DaoMoto daoMoto = Mockito.mock(DaoMoto.class);
         ServicioDetallePago servicioDetallePago = new ServicioDetallePago(repositorioMoto, daoMoto);
         Mockito.when(repositorioMoto.existePorId(Mockito.anyLong())).thenReturn(true);
-        Mockito.when(daoMoto.traerPorId(Mockito.anyLong())).thenReturn(new MotoTestDataBuilder().buildDto(cantidad));
+        Mockito.when(daoMoto.traerPorId(Mockito.anyLong())).thenReturn(new MotoTestDataBuilder().buildDto());
         // Act
         DtoDetallePago dtoDetallePago = servicioDetallePago.ejecutar(ID_MOTO);
         // Assert
-        assertEquals(2, dtoDetallePago.getImpuesto());
+        assertEquals(PORCENTAJE_IMPUESTO, dtoDetallePago.getImpuesto());
+    }
+
+    @Test
+    @DisplayName("Verificar que se incluya el descuento del lunes")
+    void verificarQueSeIncluyaElDescuentoDelLunes() {
+        // Arrange
+        double descuentoLunes = 0;
+        RepositorioMoto repositorioMoto = Mockito.mock(RepositorioMoto.class);
+        DaoMoto daoMoto = Mockito.mock(DaoMoto.class);
+        ServicioDetallePago servicioDetallePago = new ServicioDetallePago(repositorioMoto, daoMoto);
+        Mockito.when(repositorioMoto.existePorId(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(daoMoto.traerPorId(Mockito.anyLong())).thenReturn(new MotoTestDataBuilder().buildDto());
+        // Act
+        DtoDetallePago dtoDetallePago = servicioDetallePago.ejecutar(ID_MOTO);
+        if (LocalDateTime.now().getDayOfWeek() == DayOfWeek.MONDAY) {
+            descuentoLunes = PORCENTAJE_DESCUENTO_LUNES;
+        }
+        // Assert
+        assertEquals(descuentoLunes, dtoDetallePago.getDescuentoLunes());
+    }
+
+    @Test
+    @DisplayName("Verificar que se incluya el descuento del fin de semana")
+    void verificarQueSeIncluyaElDescuentoDelFinDeSemana() {
+        // Arrange
+        double descuentoFinDeSemana = 0;
+        RepositorioMoto repositorioMoto = Mockito.mock(RepositorioMoto.class);
+        DaoMoto daoMoto = Mockito.mock(DaoMoto.class);
+        ServicioDetallePago servicioDetallePago = new ServicioDetallePago(repositorioMoto, daoMoto);
+        Mockito.when(repositorioMoto.existePorId(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(daoMoto.traerPorId(Mockito.anyLong())).thenReturn(new MotoTestDataBuilder().conCc(CC_500).buildDto());
+        // Act
+        DtoDetallePago dtoDetallePago = servicioDetallePago.ejecutar(ID_MOTO);
+        if (LocalDateTime.now().getDayOfWeek() == DayOfWeek.SATURDAY || LocalDateTime.now().getDayOfWeek() == DayOfWeek.SUNDAY) {
+            descuentoFinDeSemana = PORCENTAJE_DESCUENTO_FIN_DE_SEMANA;
+        }
+        // Assert
+        assertEquals(descuentoFinDeSemana, dtoDetallePago.getDescuentoFinDeSemana());
+    }
+
+    @Test
+    @DisplayName("Verificar que no incluya el descuento del fin de semana por superar cc")
+    void verificarQueNoIncluyaElDescuentoDelFinDeSemanaPorSuperarCc() {
+        // Arrange
+        double descuentoFinDeSemana = 0;
+        RepositorioMoto repositorioMoto = Mockito.mock(RepositorioMoto.class);
+        DaoMoto daoMoto = Mockito.mock(DaoMoto.class);
+        ServicioDetallePago servicioDetallePago = new ServicioDetallePago(repositorioMoto, daoMoto);
+        Mockito.when(repositorioMoto.existePorId(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(daoMoto.traerPorId(Mockito.anyLong())).thenReturn(new MotoTestDataBuilder().conCc(CC_700).buildDto());
+        // Act
+        DtoDetallePago dtoDetallePago = servicioDetallePago.ejecutar(ID_MOTO);
+        // Assert
+        assertEquals(descuentoFinDeSemana, dtoDetallePago.getDescuentoFinDeSemana());
     }
 }

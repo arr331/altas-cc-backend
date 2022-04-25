@@ -36,6 +36,11 @@ public class MotoTestDataBuilder {
         return this;
     }
 
+    public MotoTestDataBuilder conCc(int cc) {
+        this.cc = cc;
+        return this;
+    }
+
     public MotoTestDataBuilder conNombre(String nombreMoto) {
         this.nombreMoto = nombreMoto;
         return this;
@@ -46,7 +51,12 @@ public class MotoTestDataBuilder {
         return this;
     }
 
-    public DtoMoto buildDto(int cantidad) { return new DtoMoto(id, precio, cc, marca, estado, descuento, nombreImagen, nombreMoto, cantidad); }
+    public MotoTestDataBuilder conCantidad(int cantidad) {
+        this.cantidad = cantidad;
+        return this;
+    }
+
+    public DtoMoto buildDto() { return new DtoMoto(id, precio, cc, marca, estado, descuento, nombreImagen, nombreMoto, cantidad); }
 
     public Moto build() { return Moto.of(id, precio, cc, marca, estado, descuento, nombreImagen, nombreMoto, cantidad); }
 }

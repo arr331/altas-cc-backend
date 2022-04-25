@@ -54,13 +54,25 @@ public class MotoTest {
     }
 
     @Test
-    @DisplayName("Deberia fallar sin el nombre de la imagen")
-    void deberiaFallarSiElValorEsMenorQue1000() {
+    @DisplayName("Deberia fallar si el valor de la moto es menor que 1000 USD")
+    void deberiaFallarSiElValorDeLaMotoEsMenorQue1000USD() {
         // arrange - act
         MotoTestDataBuilder motoTestDataBuilder = new MotoTestDataBuilder().conPrecio(950);
         //assert
         BasePrueba.assertThrows(() -> {
             motoTestDataBuilder.build();
         }, ExcepcionValorInvalido.class, "El precio mínimo de una moto es 1000 USD");
+    }
+
+
+    @Test
+    @DisplayName("Deberia fallar si el cilindraje de la moto es menor que 350")
+    void deberiaFallarSiElValorDelCCEsMenorQue350() {
+        // arrange - act
+        MotoTestDataBuilder motoTestDataBuilder = new MotoTestDataBuilder().conCc(349);
+        //assert
+        BasePrueba.assertThrows(() -> {
+            motoTestDataBuilder.build();
+        }, ExcepcionValorInvalido.class, "El cilindraje mínimo de una moto es 350cc");
     }
 }
