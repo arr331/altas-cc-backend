@@ -49,10 +49,18 @@ pipeline {
       }
     }
 
-    stage('Static Code Analysis') {
-      steps{
-      	echo '------------>Análisis de código estático<------------'
-        	withSonarQubeEnv('Sonar') {
+	stage('Compile & Unit Tests') {
+      	steps{
+			echo "------------>compile & Unit Tests<------------"
+			sh 'chmod +x ./microservicio/gradlew'
+			sh './microservicio/gradlew --b ./microservicio/build.gradle test'
+       	}
+    	}
+
+    	stage('Static Code Analysis') {
+      	steps{
+      		echo '------------>Análisis de código estático<------------'
+        		withSonarQubeEnv('Sonar') {
 			sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
 	  	}
 		echo '------------>Empiezo<------------'
@@ -70,14 +78,6 @@ pipeline {
 		sh 'chmod +x ./microservicio/gradlew'
 		sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
       }
-    }
-
-    stage('Compile & Unit Tests') {
-      steps{
-		echo "------------>compile & Unit Tests<------------"
-		sh 'chmod +x ./microservicio/gradlew'
-		sh './microservicio/gradlew --b ./microservicio/build.gradle test'
-       }
     }
 
   }
