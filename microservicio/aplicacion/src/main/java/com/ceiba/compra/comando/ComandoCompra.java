@@ -1,7 +1,10 @@
 package com.ceiba.compra.comando;
 
+import lombok.AllArgsConstructor;
+
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
 public class ComandoCompra {
     private Long id;
     private Long idMoto;
@@ -15,18 +18,6 @@ public class ComandoCompra {
 
     public ComandoCompra() {
         // This is intentional
-    }
-
-    public ComandoCompra(Long id, Long idMoto, String cedula, String nombreCompleto, LocalDateTime fecha, double valorTotal, double abono, String codigo, String estado) {
-        this.id = id;
-        this.idMoto = idMoto;
-        this.cedula = cedula;
-        this.nombreCompleto = nombreCompleto;
-        this.fecha = fecha;
-        this.valorTotal = valorTotal;
-        this.abono = abono;
-        this.codigo = codigo;
-        this.estado = estado;
     }
 
     public Long getId() {
