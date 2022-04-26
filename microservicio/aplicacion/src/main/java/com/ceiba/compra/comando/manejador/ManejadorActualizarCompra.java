@@ -6,11 +6,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ManejadorActualizarCompra {
-    private final FabricaCompra fabricaCompra;
     private final ServicioActualizarCompra servicioActualizarCompra;
 
-    public ManejadorActualizarCompra(FabricaCompra fabricaCompra, ServicioActualizarCompra servicioActualizarCompra) {
-        this.fabricaCompra = fabricaCompra;
+    public ManejadorActualizarCompra(ServicioActualizarCompra servicioActualizarCompra) {
         this.servicioActualizarCompra = servicioActualizarCompra;
     }
 
