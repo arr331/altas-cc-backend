@@ -6,7 +6,7 @@ import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
 public class ServicioActualizarCompra {
-    private final String LA_COMPRA_NO_EXISTE_EN_EL_SISTEMA = "Lo sentimos, la compra no existe en el sistema";
+    private static final String LA_COMPRA_NO_EXISTE_EN_EL_SISTEMA = "Lo sentimos, la compra no existe en el sistema";
     private final RepositorioCompra repositorioCompra;
     private final DaoCompra daoCompra;
 

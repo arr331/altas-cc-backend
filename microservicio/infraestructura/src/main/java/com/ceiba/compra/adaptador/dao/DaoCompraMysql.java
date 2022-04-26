@@ -33,7 +33,6 @@ public class DaoCompraMysql implements DaoCompra {
     public DtoCompra traerPorCodigo(String codigo) {
         Map<String, String> parametro = new HashMap<>();
         parametro.put("codigo", codigo);
-        System.out.println(codigo + "JADJSJDJSJ");
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlTraerPorCodigo, parametro, new MapeoCompra());
     }
 

@@ -4,7 +4,7 @@ import com.ceiba.compra.modelo.entidad.Compra;
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
-import com.ceiba.compra.adaptador.dto.DtoActualizarCompra;
+import com.ceiba.compra.modelo.dto.DtoActualizarCompra;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
