@@ -1,5 +1,6 @@
 package com.ceiba.compra.servicio.testdatabuilder;
 
+import com.ceiba.compra.modelo.dto.DtoCompra;
 import com.ceiba.compra.modelo.entidad.Compra;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,11 @@ public class CompraTestBuilder {
         this.estado = "C";
     }
 
+    public CompraTestBuilder conId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     public CompraTestBuilder conIdMoto(Long idMoto) {
         this.idMoto = idMoto;
         return this;
@@ -41,10 +47,18 @@ public class CompraTestBuilder {
         return this;
     }
 
+    public CompraTestBuilder conValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+        return this;
+    }
+
     public CompraTestBuilder conAbono(double abono) {
         this.abono = abono;
         return this;
     }
+
+    public DtoCompra buildDto() { return new DtoCompra(id, idMoto, cedula, nombreCompleto, fecha, valorTotal, abono, codigo, estado); }
+
 
     public Compra build() { return Compra.of(id, idMoto, cedula, nombreCompleto, fecha, valorTotal, abono, codigo, estado); }
 }

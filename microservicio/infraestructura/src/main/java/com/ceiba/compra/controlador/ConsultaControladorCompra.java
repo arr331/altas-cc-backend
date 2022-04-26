@@ -30,10 +30,10 @@ public class ConsultaControladorCompra {
         return this.manejadorListarCompras.ejecutar();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{codigo}")
     @ApiOperation("Traer compra por código")
-    public DtoCompra traer(@PathVariable Long id) {
-        return this.manejadorTraerCompra.ejecutar(id);
+    public DtoCompra traer(@PathVariable String codigo) {
+        return this.manejadorTraerCompra.ejecutar(codigo);
     }
 
 }

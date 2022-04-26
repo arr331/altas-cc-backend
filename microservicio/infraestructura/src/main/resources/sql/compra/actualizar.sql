@@ -1,11 +1,4 @@
 UPDATE compra
-SET id = : id,
-    id_moto = :idMoto,
-    cedula = :cedula,
-    nombre_completo = :nombreCompleto,
-    fecha = :fecha,
-    valor_total = :valorTotal,
-    abono = :abono,
-    codigo = :codigo,
+SET abono = :abono,
     estado = :estado
 WHERE id = :id;

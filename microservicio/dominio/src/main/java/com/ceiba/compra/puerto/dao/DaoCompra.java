@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface DaoCompra {
     List<DtoCompra> listar();
-    DtoCompra traerPorId(Long id);
+    DtoCompra traerPorCodigo(String codigo);
 }

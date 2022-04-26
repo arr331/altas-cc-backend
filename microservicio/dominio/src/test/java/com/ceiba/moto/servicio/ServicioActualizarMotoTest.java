@@ -29,7 +29,7 @@ public class ServicioActualizarMotoTest {
 
     @Test
     @DisplayName("Validar que la moto se actualice correctamente")
-    public void verificarNoExistencia() {
+    public void verificarQueSeActualiceLaMoto() {
         // Arrange
         Moto moto = new MotoTestDataBuilder().conId(ID).build();
         RepositorioMoto repositorioMoto = Mockito.mock(RepositorioMoto.class);

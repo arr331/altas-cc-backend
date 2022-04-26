@@ -16,7 +16,7 @@ public class ComandoCompraTestDataBuilder {
     private String estado;
 
     public ComandoCompraTestDataBuilder() {
-        this.id = 4L;
+        this.id = null;
         this.idMoto = 1L;
         this.cedula = "1040048300";
         this.nombreCompleto = "Adrian Ramírez";

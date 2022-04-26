@@ -17,8 +17,8 @@ public class DaoCompraMysql implements DaoCompra {
     @SqlStatement(namespace="compra", value="listar")
     private static String sqlListar;
 
-    @SqlStatement(namespace="compra", value="traerPorId")
-    private static String sqlTraerPorId;
+    @SqlStatement(namespace="compra", value="traerPorCodigo")
+    private static String sqlTraerPorCodigo;
 
     public DaoCompraMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -30,10 +30,11 @@ public class DaoCompraMysql implements DaoCompra {
     }
 
     @Override
-    public DtoCompra traerPorId(Long id) {
-        Map<String, Long> parametro = new HashMap<>();
-        parametro.put("id", id);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlTraerPorId, parametro, new MapeoCompra());
+    public DtoCompra traerPorCodigo(String codigo) {
+        Map<String, String> parametro = new HashMap<>();
+        parametro.put("codigo", codigo);
+        System.out.println(codigo + "JADJSJDJSJ");
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlTraerPorCodigo, parametro, new MapeoCompra());
     }
 
 }

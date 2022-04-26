@@ -12,7 +12,7 @@ public class ManejadorTraerCompra {
         this.daoCompra = daoCompra;
     }
 
-    public DtoCompra ejecutar(Long id) {
-        return this.daoCompra.traerPorId(id);
+    public DtoCompra ejecutar(String codigo) {
+        return this.daoCompra.traerPorCodigo(codigo);
     }
 }
