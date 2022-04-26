@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,8 +42,7 @@ public class ComandoControladorCompraTest {
         mocMvc.perform(post("/compras")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(comandoCompra)))
-                .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 4}")); // De donde valor
+                .andExpect(status().isOk());
     }
 
     @Test

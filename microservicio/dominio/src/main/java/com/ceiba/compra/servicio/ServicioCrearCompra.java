@@ -22,7 +22,7 @@ public class ServicioCrearCompra {
         this.servicioDetallePago = servicioDetallePago;
     }
 
-    public Long ejecutar(Compra compra) {
+    public String ejecutar(Compra compra) {
         DtoDetallePago dtoDetallePago = servicioDetallePago.ejecutar(compra.getIdMoto());
         validarRangoDelAbono(dtoDetallePago.getValorFinal(), compra.getAbono());
 
@@ -34,9 +34,12 @@ public class ServicioCrearCompra {
             compra.setValorTotal(dtoDetallePago.getValorSinDescuento());
         }
         compra.setFecha(LocalDateTime.now());
-        compra.setCodigo(String.valueOf(System.currentTimeMillis()));
+        String codigo = String.valueOf(System.currentTimeMillis());
+        compra.setCodigo(codigo);
 
-        return repositorioCompra.crear(compra);
+        repositorioCompra.crear(compra);
+
+        return codigo;
     }
 
     private void validarRangoDelAbono(double valorFinal, double abono) {

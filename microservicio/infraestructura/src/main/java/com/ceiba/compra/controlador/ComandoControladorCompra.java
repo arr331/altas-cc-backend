@@ -28,7 +28,7 @@ public class ComandoControladorCompra {
 
     @PostMapping
     @ApiOperation("Crear compra")
-    public ComandoRespuesta<Long> crear(@RequestBody ComandoCompra comandoCompra) {
+    public ComandoRespuesta<String> crear(@RequestBody ComandoCompra comandoCompra) {
         return manejadorCrearCompra.ejecutar(comandoCompra);
     }
 
