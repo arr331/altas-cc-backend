@@ -1,6 +1,5 @@
 package com.ceiba.configuracion;
 
-import com.ceiba.compra.puerto.dao.DaoCompra;
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.compra.servicio.ServicioActualizarCompra;
 import com.ceiba.compra.servicio.ServicioCrearCompra;
@@ -30,8 +29,8 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioActualizarCompra servicioActualizarCompra(RepositorioCompra repositorioCompra, DaoCompra daoCompra) {
-        return new ServicioActualizarCompra(repositorioCompra, daoCompra);
+    public ServicioActualizarCompra servicioActualizarCompra(RepositorioCompra repositorioCompra) {
+        return new ServicioActualizarCompra(repositorioCompra);
     }
 
     @Bean

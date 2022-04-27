@@ -52,7 +52,7 @@ public final class Compra {
         this.cotizacion = cotizacion;
     }
 
-    public String abonar(){
+    public String abonar() {
         validarRangoDelAbono(cotizacion.getValorFinal(), this.getAbono());
 
         if (this.abono == this.cotizacion.getValorFinal()) {

@@ -1,1 +1,1 @@
-SELECT COUNT(1) FROM compra WHERE codigo = :codigo;
+SELECT COUNT(1) FROM compra WHERE codigo = :codigo AND estado = :estado;

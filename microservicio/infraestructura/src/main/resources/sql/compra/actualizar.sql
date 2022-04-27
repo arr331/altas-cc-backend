@@ -1,4 +1,3 @@
 UPDATE compra
-SET abono = :abono,
-    estado = :estado
-WHERE id = :id;
+SET estado = :estado
+WHERE codigo = :codigo;

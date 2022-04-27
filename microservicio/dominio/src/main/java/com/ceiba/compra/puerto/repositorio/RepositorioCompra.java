@@ -5,6 +5,6 @@ import com.ceiba.compra.modelo.entidad.Compra;
 
 public interface RepositorioCompra {
     Long crear(Compra compra);
-    void actualizar(Long id, double abono);
-    boolean existePorCodigo(String codigo);
+    void actualizar(String codigo);
+    boolean existeCompraIncompletaPorCodigo(String codigo);
 }

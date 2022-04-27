@@ -4,7 +4,6 @@ import com.ceiba.compra.modelo.entidad.Compra;
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
-import com.ceiba.compra.modelo.dto.DtoActualizarCompra;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RepositorioCompraMysql implements RepositorioCompra {
     private static final String ESTADO_COMPLETO = "C";
+    private static final String ESTADO_INCOMPLETO = "I";
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace="compra", value="crear")
@@ -47,15 +47,18 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     }
 
     @Override
-    public void actualizar(Long id, double abono) {
-        DtoActualizarCompra actualizarCompra = new DtoActualizarCompra(id, abono, ESTADO_COMPLETO);
-        this.customNamedParameterJdbcTemplate.actualizar(actualizarCompra, sqlActualizar);
+    public void actualizar(String codigo) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("codigo", codigo);
+        paramSource.addValue("estado", ESTADO_COMPLETO);
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizar,paramSource);
     }
 
     @Override
-    public boolean existePorCodigo(String codigo) {
+    public boolean existeCompraIncompletaPorCodigo(String codigo) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("codigo", codigo);
+        paramSource.addValue("estado", ESTADO_INCOMPLETO);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePorCodigo, paramSource, Boolean.class);
     }
 }
