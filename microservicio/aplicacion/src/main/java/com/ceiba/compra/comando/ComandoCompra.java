@@ -1,5 +1,6 @@
 package com.ceiba.compra.comando;
 
+import com.ceiba.compra.modelo.entidad.Cotizacion;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -7,7 +8,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ComandoCompra {
     private Long id;
-    private Long idMoto;
+    private Cotizacion cotizacion;
     private String cedula;
     private String nombreCompleto;
     private LocalDateTime fecha;
@@ -28,12 +29,12 @@ public class ComandoCompra {
         this.id = id;
     }
 
-    public Long getIdMoto() {
-        return idMoto;
+    public Cotizacion getCotizacion() {
+        return cotizacion;
     }
 
-    public void setIdMoto(Long idMoto) {
-        this.idMoto = idMoto;
+    public void setCotizacion(Cotizacion cotizacion) {
+        this.cotizacion = cotizacion;
     }
 
     public String getCedula() {

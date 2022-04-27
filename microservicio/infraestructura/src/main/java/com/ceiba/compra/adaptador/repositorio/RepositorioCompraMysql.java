@@ -28,7 +28,18 @@ public class RepositorioCompraMysql implements RepositorioCompra {
 
     @Override
     public Long crear(Compra compra) {
-        return this.customNamedParameterJdbcTemplate.crear(compra, sqlCrear);
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", null);
+        paramSource.addValue("id_moto", compra.getCotizacion().getMoto().getId());
+        paramSource.addValue("cedula", compra.getCedula());
+        paramSource.addValue("nombre_completo", compra.getNombreCompleto());
+        paramSource.addValue("fecha", compra.getFecha());
+        paramSource.addValue("valor_total", compra.getValorTotal());
+        paramSource.addValue("abono", compra.getAbono());
+        paramSource.addValue("codigo", compra.getCodigo());
+        paramSource.addValue("estado", compra.getEstado());
+        return this.customNamedParameterJdbcTemplate.crear(paramSource, sqlCrear);
+//        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().execute(sqlCrear, paramSource);
     }
 
     @Override

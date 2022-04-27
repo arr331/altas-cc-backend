@@ -23,9 +23,9 @@ public class ServicioCrearCompraTest {
         // Arrange
         Compra compra = new CompraTestBuilder().conAbono(22100).build();
         RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
-        ServicioDetallePago servicioDetallePago = Mockito.mock(ServicioDetallePago.class);
-        Mockito.when(servicioDetallePago.ejecutar(Mockito.anyLong())).thenReturn(new DetallePagoTestBuilder().conValorFinal(22000).build());
-        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, servicioDetallePago);
+        ServicioCotizacion servicioCotizacion = Mockito.mock(ServicioCotizacion.class);
+        Mockito.when(servicioCotizacion.ejecutar(Mockito.anyLong())).thenReturn(new DetallePagoTestBuilder().conValorFinal(22000).build());
+        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, servicioCotizacion);
 
         // Act - Assert
         BasePrueba.assertThrows(() -> servicioCrearCompra.ejecutar(compra), ExcepcionLongitudValor.class,
@@ -38,10 +38,10 @@ public class ServicioCrearCompraTest {
         // Arrange
         Compra compra = new CompraTestBuilder().conAbono(10000).build();
         RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
-        ServicioDetallePago servicioDetallePago = Mockito.mock(ServicioDetallePago.class);
-        Mockito.when(servicioDetallePago.ejecutar(Mockito.anyLong())).
+        ServicioCotizacion servicioCotizacion = Mockito.mock(ServicioCotizacion.class);
+        Mockito.when(servicioCotizacion.ejecutar(Mockito.anyLong())).
                 thenReturn(new DetallePagoTestBuilder().conValorFinal(VALOR_FINAL).build());
-        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, servicioDetallePago);
+        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, servicioCotizacion);
 
         // Act - Assert
         BasePrueba.assertThrows(() -> servicioCrearCompra.ejecutar(compra), ExcepcionLongitudValor.class,
@@ -54,10 +54,10 @@ public class ServicioCrearCompraTest {
         // Arrange
         Compra compra = new CompraTestBuilder().conAbono(12000).build();
         RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
-        ServicioDetallePago servicioDetallePago = Mockito.mock(ServicioDetallePago.class);
-        Mockito.when(servicioDetallePago.ejecutar(Mockito.anyLong())).
+        ServicioCotizacion servicioCotizacion = Mockito.mock(ServicioCotizacion.class);
+        Mockito.when(servicioCotizacion.ejecutar(Mockito.anyLong())).
                 thenReturn(new DetallePagoTestBuilder().conValorFinal(12000).build());
-        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, servicioDetallePago);
+        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, servicioCotizacion);
         // Act
         servicioCrearCompra.ejecutar(compra);
         // Assert
@@ -70,10 +70,10 @@ public class ServicioCrearCompraTest {
         // Arrange
         Compra compra = new CompraTestBuilder().conAbono(8000).build();
         RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
-        ServicioDetallePago servicioDetallePago = Mockito.mock(ServicioDetallePago.class);
-        Mockito.when(servicioDetallePago.ejecutar(Mockito.anyLong())).
+        ServicioCotizacion servicioCotizacion = Mockito.mock(ServicioCotizacion.class);
+        Mockito.when(servicioCotizacion.ejecutar(Mockito.anyLong())).
                 thenReturn(new DetallePagoTestBuilder().conValorFinal(12000).build());
-        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, servicioDetallePago);
+        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, servicioCotizacion);
         // Act
         servicioCrearCompra.ejecutar(compra);
         // Assert

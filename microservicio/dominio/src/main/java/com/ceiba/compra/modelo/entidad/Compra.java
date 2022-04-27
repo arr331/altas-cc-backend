@@ -1,20 +1,29 @@
 package com.ceiba.compra.modelo.entidad;
 
+import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
+import com.ceiba.moto.modelo.entidad.Moto;
+
 import java.time.LocalDateTime;
 
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 import static com.ceiba.dominio.ValidadorArgumento.validarPositivo;
 
 public final class Compra {
-    private static final String MENSAJE_ID_MOTO_OBLIGATORIO = "La compra debe tener una moto";
+    private static final String MENSAJE_MOTO_OBLIGATORIO = "La compra debe tener una moto";
+    private static final String MENSAJE_COTIZACION_OBLIGATORIO = "La compra debe tener una cotización";
+
     private static final String SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA = "El campo cédula es obligatorio";
     private static final String SE_DEBE_INGRESAR_EL_NOMBRE_PERSONA = "El campo nombre completo es obligatorio";
 
-    private static final String MENSAJE_VALOR_TOTAL_POSITIVO = "El valor total de la compra debe ser positivo";
     private static final String MENSAJE_ABONO_POSITIVO = "El valor del abono de la compra debe ser positivo";
 
+    private static final String MENSAJE_ABONO_SUPERIOR_AL_VALOR_FINAL = "El valor a pagar no puede superar el valor de pago final";
+    private static final String MENSAJE_ABONO_INSUFICIENTE_PARA_PRECOMPRA = "El valor a pagar debe ser mínimo la mitad  del valor de pago final, Valor mínimo: $%s";
+    private static final String COMPRA_COMPLETA = "C";
+    private static final String COMPRA_INCOMPLETA = "I";
+    private static final double MITAD = 2;
+
     private Long id;
-    private Long idMoto;
     private String cedula;
     private String nombreCompleto;
     private LocalDateTime fecha;
@@ -22,28 +31,54 @@ public final class Compra {
     private double abono;
     private String codigo;
     private String estado;
+    private Cotizacion cotizacion;
 
-    public static Compra of(Long id, Long idMoto, String cedula, String nombreCompleto, LocalDateTime fecha, double valorTotal, double abono, String codigo, String estado) {
-        validarObligatorio(idMoto, MENSAJE_ID_MOTO_OBLIGATORIO);
+    public static Compra of(Long id, Cotizacion cotizacion, String cedula, String nombreCompleto, double abono) {
+        validarObligatorio(cotizacion.getMoto(), MENSAJE_MOTO_OBLIGATORIO);
+        validarObligatorio(cotizacion, MENSAJE_COTIZACION_OBLIGATORIO);
+
         validarObligatorio(cedula, SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA);
         validarObligatorio(nombreCompleto, SE_DEBE_INGRESAR_EL_NOMBRE_PERSONA);
 
-        validarPositivo(valorTotal, MENSAJE_VALOR_TOTAL_POSITIVO);
         validarPositivo(abono, MENSAJE_ABONO_POSITIVO);
 
-        return new Compra(id, idMoto, cedula, nombreCompleto, fecha, valorTotal, abono, codigo, estado);
+        return new Compra(id, cotizacion, cedula, nombreCompleto, abono);
     }
 
-    private Compra(Long id, Long idMoto, String cedula, String nombreCompleto, LocalDateTime fecha, double valorTotal, double abono, String codigo, String estado) {
+    private Compra(Long id, Cotizacion cotizacion, String cedula, String nombreCompleto, double abono) {
         this.id = id;
-        this.idMoto = idMoto;
         this.cedula = cedula;
         this.nombreCompleto = nombreCompleto;
-        this.fecha = fecha;
-        this.valorTotal = valorTotal;
+        this.fecha = LocalDateTime.now();
+        this.valorTotal = cotizacion.getValorFinal();
         this.abono = abono;
+
+        this.cotizacion = cotizacion;
+    }
+
+    public String abonar(){
+        validarRangoDelAbono(cotizacion.getValorFinal(), this.getAbono());
+
+        if (this.abono == this.cotizacion.getValorFinal()) {
+            this.estado = COMPRA_COMPLETA;
+            this.valorTotal = cotizacion.getValorFinal();
+        } else {
+            this.estado = COMPRA_INCOMPLETA;
+            this.valorTotal = this.cotizacion.getValorSinDescuento();
+        }
+        String codigo = String.valueOf(System.currentTimeMillis());
         this.codigo = codigo;
-        this.estado = estado;
+
+        return codigo;
+    }
+
+    private void validarRangoDelAbono(double valorFinal, double abono) {
+        if (abono > valorFinal) {
+            throw new ExcepcionLongitudValor(MENSAJE_ABONO_SUPERIOR_AL_VALOR_FINAL);
+        }
+        if (abono < (valorFinal / MITAD)) {
+            throw new ExcepcionLongitudValor(String.format(MENSAJE_ABONO_INSUFICIENTE_PARA_PRECOMPRA, valorFinal / MITAD));
+        }
     }
 
     public Long getId() {
@@ -54,67 +89,28 @@ public final class Compra {
         this.id = id;
     }
 
-    public Long getIdMoto() {
-        return idMoto;
-    }
-
-    public void setIdMoto(Long idMoto) {
-        this.idMoto = idMoto;
-    }
-
     public String getCedula() {
         return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
     }
 
     public String getNombreCompleto() {
         return nombreCompleto;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
-
     public LocalDateTime getFecha() {
         return fecha;
     }
-
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
-    }
-
     public double getValorTotal() {
         return valorTotal;
     }
-
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
     public double getAbono() {
         return abono;
     }
-
-    public void setAbono(double abono) {
-        this.abono = abono;
-    }
-
     public String getCodigo() {
         return codigo;
     }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public String getEstado() {
         return estado;
     }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+    public Cotizacion getCotizacion() { return cotizacion; }
 }

@@ -1,7 +1,5 @@
 package com.ceiba.compra.servicio.testdatabuilder;
 
-import com.ceiba.compra.modelo.dto.DtoDetallePago;
-
 public class DetallePagoTestBuilder {
     private double valorSinDescuento;
     private double valorFinal;

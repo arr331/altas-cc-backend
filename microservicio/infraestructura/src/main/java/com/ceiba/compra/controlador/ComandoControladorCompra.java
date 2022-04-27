@@ -4,8 +4,8 @@ import com.ceiba.ComandoRespuesta;
 import com.ceiba.compra.comando.ComandoCompra;
 import com.ceiba.compra.comando.manejador.ManejadorActualizarCompra;
 import com.ceiba.compra.comando.manejador.ManejadorCrearCompra;
-import com.ceiba.compra.comando.manejador.ManejadorInformacionCompra;
-import com.ceiba.compra.modelo.dto.DtoDetallePago;
+import com.ceiba.compra.comando.manejador.ManejadorCotizacion;
+import com.ceiba.compra.modelo.entidad.Cotizacion;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.*;
 public class ComandoControladorCompra {
     private final ManejadorCrearCompra manejadorCrearCompra;
     private final ManejadorActualizarCompra manejadorActualizarCompra;
-    private final ManejadorInformacionCompra manejadorInformacionCompra;
+    private final ManejadorCotizacion manejadorCotizacion;
 
     @Autowired
-    public ComandoControladorCompra(ManejadorCrearCompra manejadorCrearCompra, ManejadorActualizarCompra manejadorActualizarCompra, ManejadorInformacionCompra manejadorInformacionCompra) {
+    public ComandoControladorCompra(ManejadorCrearCompra manejadorCrearCompra, ManejadorActualizarCompra manejadorActualizarCompra, ManejadorCotizacion manejadorCotizacion) {
         this.manejadorCrearCompra = manejadorCrearCompra;
         this.manejadorActualizarCompra = manejadorActualizarCompra;
-        this.manejadorInformacionCompra = manejadorInformacionCompra;
+        this.manejadorCotizacion = manejadorCotizacion;
     }
 
     @PostMapping
@@ -38,9 +38,9 @@ public class ComandoControladorCompra {
         manejadorActualizarCompra.ejecutar(codigo);
     }
 
-    @GetMapping("/informacion-compra/{idMoto}")
+    @GetMapping("/cotizacion/{idMoto}")
     @ApiOperation("Información de pago para la compra")
-    public DtoDetallePago informacionCompra(@PathVariable Long idMoto) {
-        return this.manejadorInformacionCompra.ejecutar(idMoto);
+    public ComandoRespuesta<Cotizacion> cotizacionCompra(@PathVariable Long idMoto) {
+        return this.manejadorCotizacion.ejecutar(idMoto);
     }
 }
