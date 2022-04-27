@@ -21,12 +21,7 @@ public class ManejadorCrearCompra implements ManejadorComandoRespuesta<ComandoCo
 
     @Override
     public ComandoRespuesta<String> ejecutar(ComandoCompra comando) {
-        return new ComandoRespuesta<>(
-                this.servicioCrearCompra.ejecutar(
-                    comando.getCotizacion(),
-                    comando.getCedula(),
-                    comando.getNombreCompleto(),
-                    comando.getAbono()
-        ));
+        Compra compra = fabricaCompra.crear(comando);
+        return new ComandoRespuesta<>(this.servicioCrearCompra.ejecutar(compra));
     }
 }

@@ -27,6 +27,6 @@ public class ComandoCompraTestDataBuilder {
     }
 
     public ComandoCompra build() {
-        return new ComandoCompra(id, idMoto, cedula, nombreCompleto, fecha, valorTotal, abono, codigo, estado);
+        return new ComandoCompra(id, null, cedula, nombreCompleto, fecha, valorTotal, abono, codigo, estado);
     }
 }

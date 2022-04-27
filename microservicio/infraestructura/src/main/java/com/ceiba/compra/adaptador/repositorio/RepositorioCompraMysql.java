@@ -6,6 +6,8 @@ import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.compra.modelo.dto.DtoActualizarCompra;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -29,17 +31,19 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     @Override
     public Long crear(Compra compra) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", null);
-        paramSource.addValue("id_moto", compra.getCotizacion().getMoto().getId());
+        paramSource.addValue("idMoto", compra.getCotizacion().getMoto().getId());
         paramSource.addValue("cedula", compra.getCedula());
-        paramSource.addValue("nombre_completo", compra.getNombreCompleto());
+        paramSource.addValue("nombreCompleto", compra.getNombreCompleto());
         paramSource.addValue("fecha", compra.getFecha());
-        paramSource.addValue("valor_total", compra.getValorTotal());
+        paramSource.addValue("valorTotal", compra.getValorTotal());
         paramSource.addValue("abono", compra.getAbono());
         paramSource.addValue("codigo", compra.getCodigo());
         paramSource.addValue("estado", compra.getEstado());
-        return this.customNamedParameterJdbcTemplate.crear(paramSource, sqlCrear);
-//        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().execute(sqlCrear, paramSource);
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlCrear, paramSource,keyHolder,new String[] { "id" });
+        return keyHolder.getKey().longValue();
+
     }
 
     @Override

@@ -11,14 +11,9 @@ public class ServicioCrearCompra {
         this.repositorioCompra = repositorioCompra;
     }
 
-    public String ejecutar(Cotizacion cotizacion, String cedula, String nombreCompleto, double abono) {
-
-        Compra compra = Compra.of(1L, cotizacion, cedula, nombreCompleto, abono);
-        String codigo = compra.abonar();
+    public String ejecutar(Compra compra) {
+        compra.abonar();
         repositorioCompra.crear(compra);
-
-        return codigo;
+        return compra.getCodigo();
     }
-
-
 }

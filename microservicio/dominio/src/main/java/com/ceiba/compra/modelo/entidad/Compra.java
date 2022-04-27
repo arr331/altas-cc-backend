@@ -36,12 +36,9 @@ public final class Compra {
     public static Compra of(Long id, Cotizacion cotizacion, String cedula, String nombreCompleto, double abono) {
         validarObligatorio(cotizacion.getMoto(), MENSAJE_MOTO_OBLIGATORIO);
         validarObligatorio(cotizacion, MENSAJE_COTIZACION_OBLIGATORIO);
-
         validarObligatorio(cedula, SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA);
         validarObligatorio(nombreCompleto, SE_DEBE_INGRESAR_EL_NOMBRE_PERSONA);
-
         validarPositivo(abono, MENSAJE_ABONO_POSITIVO);
-
         return new Compra(id, cotizacion, cedula, nombreCompleto, abono);
     }
 
@@ -52,7 +49,6 @@ public final class Compra {
         this.fecha = LocalDateTime.now();
         this.valorTotal = cotizacion.getValorFinal();
         this.abono = abono;
-
         this.cotizacion = cotizacion;
     }
 
@@ -66,10 +62,9 @@ public final class Compra {
             this.estado = COMPRA_INCOMPLETA;
             this.valorTotal = this.cotizacion.getValorSinDescuento();
         }
-        String codigo = String.valueOf(System.currentTimeMillis());
-        this.codigo = codigo;
+        this.codigo = String.valueOf(System.currentTimeMillis());
 
-        return codigo;
+        return this.codigo;
     }
 
     private void validarRangoDelAbono(double valorFinal, double abono) {

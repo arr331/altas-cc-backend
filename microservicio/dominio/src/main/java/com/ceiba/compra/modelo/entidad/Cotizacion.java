@@ -1,10 +1,12 @@
 package com.ceiba.compra.modelo.entidad;
 
 import com.ceiba.moto.modelo.entidad.Moto;
+import lombok.NoArgsConstructor;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+@NoArgsConstructor
 public class Cotizacion {
     private static final double PORCENTAJE_IMPUESTO = 2;
     private static final double PORCENTAJE_DESCUENTO_LUNES = 1.5;
