@@ -32,4 +32,16 @@ public class ServicioCotizacionTest {
         BasePrueba.assertThrows(() -> servicioCotizacion.ejecutar(cotizacion), ExcepcionSinDatos.class,
                 "Esta moto no está disponible para su compra");
     }
+
+    @Test
+    @DisplayName("Validar que se realice la cotizacion")
+    void verificarQueSeRealiceLaCotizacion() {
+        // Arrange
+        Cotizacion cotizacion = new CotizacionTestBuilder().build();
+        ServicioCotizacion servicioCotizacion = new ServicioCotizacion();
+        // Act
+        Cotizacion cotizacionCreada = servicioCotizacion.ejecutar(cotizacion);
+        // Assert
+        assertEquals(cotizacionCreada, cotizacion);
+    }
 }

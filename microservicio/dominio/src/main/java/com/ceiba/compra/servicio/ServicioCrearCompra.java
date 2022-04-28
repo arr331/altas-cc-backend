@@ -1,7 +1,6 @@
 package com.ceiba.compra.servicio;
 
 import com.ceiba.compra.modelo.entidad.Compra;
-import com.ceiba.compra.modelo.entidad.Cotizacion;
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 
 public class ServicioCrearCompra {

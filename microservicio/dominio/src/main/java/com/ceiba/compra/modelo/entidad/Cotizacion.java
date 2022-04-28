@@ -29,7 +29,6 @@ public class Cotizacion {
 
     public Cotizacion(Moto moto) {
         validarObligatorio(moto, MENSAJE_MOTO_OBLIGATORIO);
-
         this.moto = moto;
         generar();
     }
@@ -37,23 +36,21 @@ public class Cotizacion {
     private void generar() {
         LocalDate fechaActual = LocalDate.now();
 
-        double valorFinal = obtenerPorcionDelPorcentaje(this.moto.getPrecio(), this.moto.getDescuento());
+        this.valorFinal = obtenerPorcionDelPorcentaje(this.moto.getPrecio(), this.moto.getDescuento());
+        this.valorSinDescuento = this.moto.getPrecio();
 
         if (fechaActual.getDayOfWeek() == DayOfWeek.MONDAY) {
-            valorFinal = obtenerPorcionDelPorcentaje(valorFinal, PORCENTAJE_DESCUENTO_LUNES);
+            this.valorFinal = obtenerPorcionDelPorcentaje(valorFinal, PORCENTAJE_DESCUENTO_LUNES);
             this.descuentoLunes = PORCENTAJE_DESCUENTO_LUNES;
         }
         if (this.moto.getCc() < CC_PARA_DESCUENTO && (fechaActual.getDayOfWeek() == DayOfWeek.SATURDAY || fechaActual.getDayOfWeek() == DayOfWeek.SUNDAY)) {
-            valorFinal = obtenerPorcionDelPorcentaje(valorFinal, PORCENTAJE_DESCUENTO_FIN_DE_SEMANA);
+            this.valorFinal = obtenerPorcionDelPorcentaje(valorFinal, PORCENTAJE_DESCUENTO_FIN_DE_SEMANA);
             this.descuentoFinDeSemana = PORCENTAJE_DESCUENTO_FIN_DE_SEMANA;
         }
         if (this.moto.getPrecio() > PRECIO_USD_PARA_IMPUESTO) {
-            valorFinal = valorFinal * (UNO + (PORCENTAJE_IMPUESTO / CIEN));
+            this.valorFinal = valorFinal * (UNO + (PORCENTAJE_IMPUESTO / CIEN));
             this.impuesto = PORCENTAJE_IMPUESTO;
         }
-
-        this.valorFinal = valorFinal;
-        this.valorSinDescuento = this.moto.getPrecio();
     }
 
     private double obtenerPorcionDelPorcentaje(double valor, double porcentajeDescuento) {

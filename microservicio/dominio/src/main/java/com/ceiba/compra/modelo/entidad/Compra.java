@@ -1,7 +1,6 @@
 package com.ceiba.compra.modelo.entidad;
 
 import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
-import com.ceiba.moto.modelo.entidad.Moto;
 
 import java.time.LocalDateTime;
 

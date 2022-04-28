@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 public class RepositorioCompraMysql implements RepositorioCompra {
     private static final String ESTADO_COMPLETO = "C";
     private static final String ESTADO_INCOMPLETO = "I";
+    private static final String CODIGO = "codigo";
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace="compra", value="crear")
@@ -37,7 +38,7 @@ public class RepositorioCompraMysql implements RepositorioCompra {
         paramSource.addValue("fecha", compra.getFecha());
         paramSource.addValue("valorTotal", compra.getValorTotal());
         paramSource.addValue("abono", compra.getAbono());
-        paramSource.addValue("codigo", compra.getCodigo());
+        paramSource.addValue(CODIGO, compra.getCodigo());
         paramSource.addValue("estado", compra.getEstado());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -49,7 +50,7 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     @Override
     public void actualizar(String codigo) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("codigo", codigo);
+        paramSource.addValue(CODIGO, codigo);
         paramSource.addValue("estado", ESTADO_COMPLETO);
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizar,paramSource);
     }
@@ -57,7 +58,7 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     @Override
     public boolean existeCompraIncompletaPorCodigo(String codigo) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("codigo", codigo);
+        paramSource.addValue(CODIGO, codigo);
         paramSource.addValue("estado", ESTADO_INCOMPLETO);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePorCodigo, paramSource, Boolean.class);
     }
