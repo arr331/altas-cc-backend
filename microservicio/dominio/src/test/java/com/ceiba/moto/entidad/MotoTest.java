@@ -75,4 +75,15 @@ public class MotoTest {
             motoTestDataBuilder.build();
         }, ExcepcionValorInvalido.class, "El cilindraje mínimo de una moto es 350cc");
     }
+
+    @Test
+    @DisplayName("Deberia fallar si la cantidad es negativa")
+    void deberiaFallarSiLaCantidadEsNegativa() {
+        // arrange - act
+        MotoTestDataBuilder motoTestDataBuilder = new MotoTestDataBuilder().conCantidad(-1);
+        //assert
+        BasePrueba.assertThrows(() -> {
+            motoTestDataBuilder.build();
+        }, ExcepcionValorInvalido.class, "El valor de la cantidad de motos debe ser positivo");
+    }
 }
