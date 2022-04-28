@@ -1,5 +1,6 @@
 package com.ceiba.moto.modelo.entidad;
 
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import lombok.NoArgsConstructor;
 
 import static com.ceiba.dominio.ValidadorArgumento.*;
@@ -48,7 +49,7 @@ public final class Moto {
         validarMenor(CILINDRAJE_MINIMO, (long) cc, CILINDRAJE_MINIMO_MENSAJE);
 
         validarPositivo(descuento, VALOR_DESCUENTO_POSITIVO);
-        validarPositivo((double) cantidad, VALOR_CANTIDAD_POSITIVO);
+        validarNegativo(cantidad, VALOR_CANTIDAD_POSITIVO);
 
         return new Moto(id, precio, cc, marca, estado, descuento, nombreImagen, nombreMoto, cantidad);
     }
@@ -63,6 +64,12 @@ public final class Moto {
         this.nombreImagen = nombreImagen;
         this.nombreMoto = nombreMoto;
         this.cantidad = cantidad;
+    }
+
+    private static void validarNegativo(double valor, String mensaje) {
+        if (valor < 0) {
+            throw new ExcepcionValorInvalido(mensaje);
+        }
     }
 
     public Long getId() {

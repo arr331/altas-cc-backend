@@ -23,7 +23,6 @@ public final class Compra {
     private static final String COMPRA_INCOMPLETA = "I";
     private static final double MITAD = 2;
 
-    private Long id;
     private String cedula;
     private String nombreCompleto;
     private LocalDateTime fecha;
@@ -33,17 +32,16 @@ public final class Compra {
     private String estado;
     private Cotizacion cotizacion;
 
-    public static Compra of(Long id, Cotizacion cotizacion, String cedula, String nombreCompleto, double abono) {
-        validarObligatorio(cotizacion.getMoto(), MENSAJE_MOTO_OBLIGATORIO);
+    public static Compra of(Cotizacion cotizacion, String cedula, String nombreCompleto, double abono) {
         validarObligatorio(cotizacion, MENSAJE_COTIZACION_OBLIGATORIO);
+        validarObligatorio(cotizacion.getMoto(), MENSAJE_MOTO_OBLIGATORIO);
         validarObligatorio(cedula, SE_DEBE_INGRESAR_LA_CEDULA_DE_LA_PERSONA);
         validarObligatorio(nombreCompleto, SE_DEBE_INGRESAR_EL_NOMBRE_PERSONA);
         validarPositivo(abono, MENSAJE_ABONO_POSITIVO);
-        return new Compra(id, cotizacion, cedula, nombreCompleto, abono);
+        return new Compra(cotizacion, cedula, nombreCompleto, abono);
     }
 
-    private Compra(Long id, Cotizacion cotizacion, String cedula, String nombreCompleto, double abono) {
-        this.id = id;
+    private Compra(Cotizacion cotizacion, String cedula, String nombreCompleto, double abono) {
         this.cedula = cedula;
         this.nombreCompleto = nombreCompleto;
         this.fecha = LocalDateTime.now();
@@ -76,22 +74,12 @@ public final class Compra {
         }
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getCedula() {
         return cedula;
     }
-
     public String getNombreCompleto() {
         return nombreCompleto;
     }
-
     public LocalDateTime getFecha() {
         return fecha;
     }

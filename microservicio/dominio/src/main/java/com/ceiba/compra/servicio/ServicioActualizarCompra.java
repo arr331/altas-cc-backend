@@ -4,7 +4,7 @@ import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
 public class ServicioActualizarCompra {
-    private static final String LA_COMPRA_NO_EXISTE_EN_EL_SISTEMA = "Lo sentimos, no se encrontró una compra pendiente con este código";
+    private static final String LA_COMPRA_NO_EXISTE_EN_EL_SISTEMA = "Lo sentimos, no se encrontro una compra pendiente con este codigo";
     private final RepositorioCompra repositorioCompra;
 
     public ServicioActualizarCompra(RepositorioCompra repositorioCompra) {

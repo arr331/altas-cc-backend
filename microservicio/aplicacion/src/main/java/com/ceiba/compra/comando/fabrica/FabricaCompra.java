@@ -11,7 +11,6 @@ public class FabricaCompra {
 
     public Compra crear(ComandoCompra comandoCompra) {
         return Compra.of(
-                comandoCompra.getId(),
                 comandoCompra.getCotizacion(),
                 comandoCompra.getCedula(),
                 comandoCompra.getNombreCompleto(),

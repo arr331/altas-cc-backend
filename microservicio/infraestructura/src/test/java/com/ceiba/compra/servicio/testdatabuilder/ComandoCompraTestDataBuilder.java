@@ -1,32 +1,39 @@
 package com.ceiba.compra.servicio.testdatabuilder;
 
 import com.ceiba.compra.comando.ComandoCompra;
+import com.ceiba.compra.modelo.entidad.Cotizacion;
 
 import java.time.LocalDateTime;
 
 public class ComandoCompraTestDataBuilder {
-    private Long id;
-    private Long idMoto;
+    private Cotizacion cotizacion;
     private String cedula;
     private String nombreCompleto;
-    private LocalDateTime fecha;
-    private double valorTotal;
     private double abono;
-    private String codigo;
-    private String estado;
 
     public ComandoCompraTestDataBuilder() {
-        this.id = null;
-        this.idMoto = 1L;
+        this.cotizacion = new CotizacionTestDataBuilder().build();
         this.cedula = "1040048300";
         this.nombreCompleto = "Adrian Ramírez";
-        this.valorTotal = 22050;
         this.abono = 22050;
-        this.codigo = "2022-1";
-        this.estado = "C";
+    }
+
+    public ComandoCompraTestDataBuilder conCotizacion() {
+        this.cotizacion = cotizacion;
+        return this;
+    }
+
+    public ComandoCompraTestDataBuilder conNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+        return this;
+    }
+
+    public ComandoCompraTestDataBuilder conValorAbono(double abono) {
+        this.abono = abono;
+        return this;
     }
 
     public ComandoCompra build() {
-        return new ComandoCompra(id, null, cedula, nombreCompleto, fecha, valorTotal, abono, codigo, estado);
+        return new ComandoCompra(this.cotizacion, this.cedula, this.nombreCompleto, this.abono);
     }
 }

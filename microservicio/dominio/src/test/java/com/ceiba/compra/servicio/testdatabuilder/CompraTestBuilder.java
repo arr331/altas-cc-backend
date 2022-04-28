@@ -2,12 +2,12 @@ package com.ceiba.compra.servicio.testdatabuilder;
 
 import com.ceiba.compra.modelo.dto.DtoCompra;
 import com.ceiba.compra.modelo.entidad.Compra;
+import com.ceiba.compra.modelo.entidad.Cotizacion;
+import com.ceiba.moto.modelo.entidad.Moto;
 
 import java.time.LocalDateTime;
 
 public class CompraTestBuilder {
-    private Long id;
-    private Long idMoto;
     private String cedula;
     private String nombreCompleto;
     private LocalDateTime fecha;
@@ -15,30 +15,20 @@ public class CompraTestBuilder {
     private double abono;
     private String codigo;
     private String estado;
+    private Cotizacion cotizacion;
 
     public CompraTestBuilder() {
-        this.id = 1L;
-        this.idMoto = 1L;
+        this.cotizacion = new CotizacionTestBuilder().build();
         this.cedula = "1040048300";
         this.nombreCompleto = "Adrian Ramírez";
-        this.valorTotal = 22050;
-        this.abono = 22050;
+        this.valorTotal = this.cotizacion.getValorFinal();
+        this.abono = this.cotizacion.getValorFinal();
         this.codigo = "2021-1";
         this.estado = "C";
     }
 
-    public CompraTestBuilder conId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public CompraTestBuilder conIdMoto(Long idMoto) {
-        this.idMoto = idMoto;
-        return this;
-    }
-
-    public CompraTestBuilder conFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public CompraTestBuilder conCotizacion(Cotizacion cotizacion) {
+        this.cotizacion = cotizacion;
         return this;
     }
 
@@ -57,8 +47,8 @@ public class CompraTestBuilder {
         return this;
     }
 
-    public DtoCompra buildDto() { return new DtoCompra(id, idMoto, cedula, nombreCompleto, fecha, valorTotal, abono, codigo, estado); }
+//    public DtoCompra buildDto() { return new DtoCompra(id, idMoto, cedula, nombreCompleto, fecha, valorTotal, abono, codigo, estado); }
 
 
-    public Compra build() { return Compra.of(id, idMoto, cedula, nombreCompleto, fecha, valorTotal, abono, codigo, estado); }
+    public Compra build() { return Compra.of(this.cotizacion, this.cedula, this.nombreCompleto, this.abono); }
 }

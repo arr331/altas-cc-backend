@@ -6,8 +6,12 @@ import lombok.NoArgsConstructor;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
+
 @NoArgsConstructor
 public class Cotizacion {
+    private static final String MENSAJE_MOTO_OBLIGATORIO = "La compra debe tener una moto";
+
     private static final double PORCENTAJE_IMPUESTO = 2;
     private static final double PORCENTAJE_DESCUENTO_LUNES = 1.5;
     private static final double PORCENTAJE_DESCUENTO_FIN_DE_SEMANA = 1;
@@ -24,6 +28,8 @@ public class Cotizacion {
     private double descuentoFinDeSemana; // 1%
 
     public Cotizacion(Moto moto) {
+        validarObligatorio(moto, MENSAJE_MOTO_OBLIGATORIO);
+
         this.moto = moto;
         generar();
     }
