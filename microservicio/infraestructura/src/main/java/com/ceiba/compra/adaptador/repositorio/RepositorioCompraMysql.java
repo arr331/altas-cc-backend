@@ -14,6 +14,8 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     private static final String ESTADO_COMPLETO = "C";
     private static final String ESTADO_INCOMPLETO = "I";
     private static final String CODIGO = "codigo";
+    private static final String ESTADO = "estado";
+
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace="compra", value="crear")
@@ -39,7 +41,7 @@ public class RepositorioCompraMysql implements RepositorioCompra {
         paramSource.addValue("valorTotal", compra.getValorTotal());
         paramSource.addValue("abono", compra.getAbono());
         paramSource.addValue(CODIGO, compra.getCodigo());
-        paramSource.addValue("estado", compra.getEstado());
+        paramSource.addValue(ESTADO, compra.getEstado());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlCrear, paramSource,keyHolder,new String[] { "id" });
@@ -51,7 +53,7 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     public void actualizar(String codigo) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue(CODIGO, codigo);
-        paramSource.addValue("estado", ESTADO_COMPLETO);
+        paramSource.addValue(ESTADO, ESTADO_COMPLETO);
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizar,paramSource);
     }
 
@@ -59,7 +61,7 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     public boolean existeCompraIncompletaPorCodigo(String codigo) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue(CODIGO, codigo);
-        paramSource.addValue("estado", ESTADO_INCOMPLETO);
+        paramSource.addValue(ESTADO, ESTADO_INCOMPLETO);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExistePorCodigo, paramSource, Boolean.class);
     }
 }
